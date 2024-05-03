@@ -98,6 +98,7 @@ const Main = () => {
 
   return (
     <div
+      className="graph__container"
       style={{
         width: '100%',
       }}
@@ -226,6 +227,8 @@ root.render(
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+      maxWidth: 1280,
+      margin: 'auto',
     }}
   >
     <Main />

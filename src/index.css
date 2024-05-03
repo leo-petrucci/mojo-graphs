@@ -7,17 +7,27 @@ body,
   line-height: 2em;
 }
 
+.graph__container {
+  container-type: inline-size;
+}
+
 .graph__elements {
   position: relative;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   background: #000928;
   border-radius: 16px;
   color: #b5bedc;
   padding: 8px;
   padding-bottom: 0;
+}
+
+@container (min-width: 1024px) {
+  .graph__elements {
+    flex-direction: row;
+  }
 }
 
 .graph__elements--static {

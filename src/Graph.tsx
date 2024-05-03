@@ -1,14 +1,13 @@
 import { max } from '@visx/vendor/d3-array'
 import * as allCurves from '@visx/curve'
 import { Group } from '@visx/group'
-import { AreaClosed, Line, LinePath } from '@visx/shape'
+import { AreaClosed, LinePath } from '@visx/shape'
 import { scaleLinear } from '@visx/scale'
 import { PatternLines } from '@visx/pattern'
 import { Text } from '@visx/text'
 import { LinearGradient } from '@visx/gradient'
 import { Axis } from '@visx/axis'
 import React from 'react'
-import { useTooltip, useTooltipInPortal } from '@visx/tooltip'
 import { MortgageData } from './data'
 
 export const background = '#3b6978'
@@ -52,28 +51,6 @@ export default function Example({
   const svgHeight = height
   const margin = svgHeight / 4
 
-  const {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    tooltipOpen,
-    showTooltip,
-    hideTooltip,
-  } = useTooltip<{
-    type: 'less' | 'equal' | 'more'
-    loan: number
-    lenders: number
-  }>()
-
-  // If you don't want to use a Portal, simply replace `TooltipInPortal` below with
-  // `Tooltip` or `TooltipWithBounds` and remove `containerRef`
-  const { containerRef, TooltipInPortal } = useTooltipInPortal({
-    // use TooltipWithBounds
-    detectBounds: true,
-    // when tooltip containers are scrolled, this will correctly update the Tooltip position
-    scroll: true,
-  })
-
   // update scale output ranges
   xScale.range([0, width])
   yScale.range([svgHeight - margin / 2, 0])
@@ -99,9 +76,7 @@ export default function Example({
   )
 
   /**
-   * Data points without last
-   * returns points we actually have data about
-   * used for line
+   * Data points that the user can interact with
    */
   const interactablePoints = React.useMemo(
     () => internalPoints.filter((p) => p.deposit || p.likelyHood),
@@ -169,12 +144,6 @@ export default function Example({
     return mortgageData.slice(startIndex, endIndex)
   }, [mortgageData])
 
-  const currencyFormatter = new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP',
-    minimumFractionDigits: 0,
-  })
-
   const shortCurrencyFormatter = new Intl.NumberFormat('en-GB', {
     style: 'currency',
     currency: 'GBP',
@@ -185,7 +154,7 @@ export default function Example({
 
   return (
     <div className="visx-curves-demo">
-      <svg width={width} height={svgHeight} ref={containerRef}>
+      <svg width={width} height={svgHeight}>
         <rect
           fill="#000928"
           x={0}
@@ -441,53 +410,6 @@ export default function Example({
           />
         </Group>
       </svg>
-      {tooltipOpen && tooltipData && (
-        <TooltipInPortal
-          // set this to random so it correctly updates with parent bounds
-          key={Math.random()}
-          style={{
-            width: '200px',
-            position: 'absolute',
-            backgroundColor: 'white',
-            color: 'rgb(102, 102, 102)',
-            padding: '0.3rem 0.5rem',
-            borderRadius: '3px',
-            fontSize: '14px',
-            boxShadow: 'rgba(33, 33, 33, 0.2) 0px 1px 2px',
-            lineHeight: '1.5em',
-            pointerEvents: 'none',
-          }}
-          top={tooltipTop}
-          left={tooltipLeft}
-        >
-          {tooltipData.type === 'less' && (
-            <>
-              You will definitely be able to get a loan of{' '}
-              <strong>{currencyFormatter.format(tooltipData.loan)}</strong> from{' '}
-              <strong>{tooltipData.lenders} lenders</strong> at a lower than
-              average interest rate.
-            </>
-          )}
-
-          {tooltipData.type === 'more' && (
-            <>
-              You might be able to get a loan of{' '}
-              <strong>{currencyFormatter.format(tooltipData.loan)}</strong> from{' '}
-              <strong>{tooltipData.lenders} lenders</strong> at a higher than
-              average interest rate.
-            </>
-          )}
-
-          {tooltipData.type === 'equal' && (
-            <>
-              This is your sweet spot, you should be able to get a loan of{' '}
-              <strong>{currencyFormatter.format(tooltipData.loan)}</strong> from{' '}
-              <strong>{tooltipData.lenders} lenders</strong> at an average
-              interest rate.
-            </>
-          )}
-        </TooltipInPortal>
-      )}
     </div>
   )
 }
