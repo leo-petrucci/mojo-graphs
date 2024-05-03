@@ -53,7 +53,7 @@ export default function Example({
 
   // update scale output ranges
   xScale.range([0, width])
-  yScale.range([svgHeight - margin / 2, 0])
+  yScale.range([svgHeight - margin, 0])
 
   const dataYScale = React.useMemo(
     () =>

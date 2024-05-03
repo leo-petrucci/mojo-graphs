@@ -225,12 +225,16 @@ root.render(
       height: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       maxWidth: 1280,
       margin: 'auto',
     }}
   >
     <Main />
+    <h1>Generated from:</h1>
+    <pre>
+      <code>{JSON.stringify(mortgageData, null, 4)}</code>
+    </pre>
   </div>
 )

@@ -32,6 +32,6 @@ export const mortgageData: MortgageData[] = [
   },
   {
     loan: 273000,
-    lenders: 10,
+    lenders: 0,
   },
 ]
