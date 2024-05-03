@@ -6,3 +6,155 @@ body,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 2em;
 }
+
+.graph__elements {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+
+  background: #000928;
+  border-radius: 16px;
+  color: #b5bedc;
+  padding: 8px;
+  padding-bottom: 0;
+}
+
+.graph__elements--static {
+  padding: 32px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.graph__elements--staticElement {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 200px;
+}
+
+.graph__elements--staticElement .loan {
+  font-size: 36px;
+  color: white;
+  font-weight: 700;
+}
+
+.graph__elements--staticElement .caption {
+  line-height: 1.75;
+}
+
+.graph__elements--interactable {
+  flex: 1 1 0%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 16px;
+  border: 1px solid #3b4258;
+  border-radius: 16px;
+}
+
+.graph__elements--interactable .likelyhoodSwitch {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+
+  text-transform: capitalize;
+}
+
+.graph__elements--interactable .likelyhoodSwitch button {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.graph__elements--interactable .likelyhoodSwitch button:hover {
+  background: #3b4258;
+}
+
+.graph__elements--interactable .interactable__top {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.graph__elements--interactable .interactable__top .borrowingRange {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+.graph__elements--interactable .interactable__top .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+}
+
+.graph__elements--interactable .interactable__top .high-bg {
+  background-color: #80ffc1;
+}
+
+.graph__elements--interactable .interactable__top .moderate-bg {
+  background-color: #ffc47f;
+}
+
+.graph__elements--interactable .interactable__top .low-bg {
+  background-color: #fe8080;
+}
+
+.graph__elements--interactable .interactable__top .high-text {
+  color: #80ffc1;
+}
+
+.graph__elements--interactable .interactable__top .moderate-text {
+  color: #ffc47f;
+}
+
+.graph__elements--interactable .interactable__top .low-text {
+  color: #fe8080;
+}
+
+.graph__elements--interactable .interactable__bottom {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  /* justify-content: space-between; */
+}
+
+.graph__elements--interactable .interactable__bottom .info__container {
+  flex: 1 1 0%;
+
+  background: #3b4258;
+  padding: 16px;
+}
+
+.graph__elements--interactable .interactable__bottom .info__container.left {
+  border-radius: 8px 0px 0px 8px;
+}
+
+.graph__elements--interactable .interactable__bottom .info__container.right {
+  border-radius: 0 8px 8px 0;
+}
+
+.graph__elements--interactable .interactable__bottom .info__container .value {
+  font-size: 23px;
+  font-weight: 600;
+  color: white;
+}
+
+.graph__elements--interactable .interactable__bottom .info__container .caption {
+  font-size: 14px;
+}
